@@ -1,0 +1,128 @@
+[
+  {
+    "finding_id": "audience/ki-chats-statt-suchmaschine",
+    "stage": "figures",
+    "verdict": "supported",
+    "figures_found": [
+      "50",
+      "24",
+      "1.156"
+    ],
+    "figures_missing": [],
+    "evidence": "50 Prozent der Internetnutzerinnen und -nutzer verwenden zumindest gelegentlich KI-Chats statt klassischer Suchmaschinen Bei den 16- bis 29-J\u00e4hrigen sind es sogar zwei Drittel 42 Prozent haben schon falsche Antworten bekommen, nur 57 Prozent pr\u00fcfen die Ergebnisse Berlin, 20. November 2025 \u2013 Suchbegriffe eingeben, Trefferlisten durchklicken, Informationen zusammentragen \u2013 viele Internetnutzerinnen und -nutzer gehen neue Wege und lassen sich Antworten direkt von der KI liefern.",
+    "checked": "2026-10-16",
+    "note": null
+  },
+  {
+    "finding_id": "audience/generative-ki-nutzung",
+    "stage": "figures",
+    "verdict": "supported",
+    "figures_found": [
+      "67",
+      "43",
+      "28",
+      "1.005"
+    ],
+    "figures_missing": [],
+    "evidence": "Inzwischen nutzen 67 Prozent der Deutschen generative KI Zwei Drittel sehen bei KI zu gro\u00dfe Abh\u00e4ngigkeiten von USA und China \u00dcber die H\u00e4lfte der Berufst\u00e4tigen w\u00fcnschen sich KI-Unterst\u00fctzung im Job \u2013 10 Prozent nutzen sie ohne Wissen des Arbeitgebers",
+    "checked": "2026-10-16",
+    "note": null
+  },
+  {
+    "finding_id": "audience/handwerkersuche-webseite-ausschluss",
+    "stage": "figures",
+    "verdict": "supported",
+    "figures_found": [
+      "40",
+      "55",
+      "1.004"
+    ],
+    "figures_missing": [],
+    "evidence": "Obwohl bei der Entscheidungsfindung noch immer am meisten auf pers\u00f6nliche Gespr\u00e4che oder auch den Besuch vor Ort zur\u00fcckgegriffen wird, ist \u00fcber die H\u00e4lfte der Deutschen der Meinung, dass digitale Angebote Handwerksbetriebe durchaus attraktiver machen (55 Prozent) \u2013 f\u00fcr 4 von 10 (40 Prozent) ist das Fehlen einer Webseite sogar ein Ausschlusskriterium bei der Wahl eines entsprechenden Betriebs. \u201eIm Handwerk wird nach wie vor sehr viel auf pers\u00f6nliche Empfehlung hin beauftragt \u2013 und auch ein direktes Beratungsgespr\u00e4ch mit dem Fachpersonal hilft, eine fundierte Entscheidung zu treffen.",
+    "checked": "2026-10-16",
+    "note": null
+  },
+  {
+    "finding_id": "audience/arztbewertungen-online",
+    "stage": "figures",
+    "verdict": "supported",
+    "figures_found": [
+      "55",
+      "57",
+      "1.144"
+    ],
+    "figures_missing": [],
+    "evidence": "55 Prozent informieren sich \u00fcber \u00c4rztinnen, \u00c4rzte oder medizinische Einrichtungen, bevor sie ihre Wahl treffen Bewertungen wird gro\u00dfe Bedeutung beigemessen \u2013 insbesondere im Bereich Pflege",
+    "checked": "2026-10-16",
+    "note": null
+  },
+  {
+    "finding_id": "audience/google-maps-bewertungen",
+    "stage": "figures",
+    "verdict": "supported",
+    "figures_found": [
+      "13",
+      "6",
+      "24",
+      "2.178"
+    ],
+    "figures_missing": [],
+    "evidence": "Google-Profile sind kein Teil eines neutralen Stadtplans. \u00a9 Martin M\u00f6ller/imago Demnach treffen 13 Prozent der Befragten h\u00e4ufig und weitere 6 Prozent sehr h\u00e4ufig pro Woche Konsumentscheidungen auf Basis von Bewertungen bei Google Maps. 24 Prozent tun dies manchmal, 27 Prozent selten. 18 Prozent greifen nie darauf zur\u00fcck.",
+    "checked": "2026-10-16",
+    "note": null
+  },
+  {
+    "finding_id": "audience/handwerksbetriebe-deutschland",
+    "stage": "figures",
+    "verdict": "supported",
+    "figures_found": [
+      "1.038.126",
+      "783"
+    ],
+    "figures_missing": [],
+    "evidence": "Vojahr in % Betriebsbest\u00e4nde 1) Handwerk gesamt 1.038.126 -0,0% Anlage A (zulassungspflichtig) 641.462 -1,7% Anlage A einfache T\u00e4tigkeiten 217 -0,9% Anlage B1 (zulassungsfrei) 286.223 +4,0% Anlage B2 (handwerks\u00e4hnlich) 110.224 +0,0% Lehrlingsbestand 1) Handwerk gesamt 346.388 -1,3% davon: weibliche Auszubildende 60.783 +2,6% davon: ausl\u00e4ndische Auszubildende 56.286 +18,7% Neu abgeschlossene Ausbildungsvertr\u00e4ge 132.576 +1,0% Vorzeitige L\u00f6sungen von Ausbildungsvertr\u00e4gen 54.814 -0,4% Gesellenpr\u00fcfungen, bestandene 80.748 -2,3% Meisterpr\u00fcfungen, bestandene 20.461 +0,2% Einwohner insgesamt in 1 000 (31.12.2024) 2) 83.577 -1,3% Betriebsbesatz / 1 000 Einwohner (31.12.2024) Handwerk gesamt 12,4 +1,4% Umsatz im Handwerk in Mrd. \u20ac 3) 4) 5) 6) 783 +1,2% darunter: Anlagen A+B1 770 +1,1% BV-Verh\u00e4ltnisse im Handwerk in 1 000 4) 5) 6.237 -1,3% darunter: Anlagen A+B1 5.904 -1,4% 1) Bestand der in den Handwerksrollen eingetragenen Betriebe/Ausbildungsverh\u00e4ltnisse per 31.12.2025; 2) Quelle: Statistisches Bundesamt, IW K\u00f6ln; 3) ohne Umsatzsteuer; 4) gesch\u00e4tzt; 5) Handwerk gesamt - keine L\u00e4nderdaten, keine Daten f\u00fcr Anlage B2; 6) Ums\u00e4tze nominal ohne Ber\u00fccksichtigung der Preisentwicklung",
+    "checked": "2026-10-16",
+    "note": null
+  },
+  {
+    "finding_id": "audience/handwerk-kammerbezirk-muenster",
+    "stage": "figures",
+    "verdict": "supported",
+    "figures_found": [
+      "30.749",
+      "210.000",
+      "33,4"
+    ],
+    "figures_missing": [],
+    "evidence": "Hintergrund: Der Kammerbezirk Hintergrund Zum Handwerk im Kammerbezirk M&uuml;nster geh&ouml;ren 30.749 Betriebe (Stand: 31. Dezember 2025) mit rund 210.000 Besch&auml;ftigten, davon 13.500 Auszubildenden.",
+    "checked": "2026-10-16",
+    "note": null
+  },
+  {
+    "finding_id": "audience/handwerk-sichtbarkeit-ki",
+    "stage": "figures",
+    "verdict": "supported",
+    "figures_found": [
+      "75",
+      "4",
+      "504"
+    ],
+    "figures_missing": [],
+    "evidence": "Neben hohen Kosten f\u00fcr Energie (81 Prozent) und Material (59 Prozent) sind vor allem fehlende Auszubildende und Fachkr\u00e4fte ein Thema. 83 Prozent der Unternehmen beklagen einen Auszubildenden- und 75 Prozent einen Fachkr\u00e4ftemangel.",
+    "checked": "2026-10-16",
+    "note": null
+  },
+  {
+    "finding_id": "audience/digitale-intensitaet-kleine-unternehmen",
+    "stage": "figures",
+    "verdict": "supported",
+    "figures_found": [
+      "29",
+      "39"
+    ],
+    "figures_missing": [],
+    "evidence": "Dabei k\u00f6nnen 29 Prozent der kleinen Unternehmen die grundlegende digitale Intensit\u00e4t (4 Punkte oder mehr) nicht erreichen.",
+    "checked": "2026-10-16",
+    "note": null
+  }
+]

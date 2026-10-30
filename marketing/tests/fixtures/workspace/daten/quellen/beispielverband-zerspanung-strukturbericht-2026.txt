@@ -1,0 +1,22 @@
+SYNTHETIC EXAMPLE SOURCE - invented for the bundled example workspace, not real data.
+
+Beispielverband Zerspanung e. V.
+Strukturbericht Zerspanungstechnik 2026
+Veroeffentlicht: 2026-03-11
+
+Seite 7, Betriebsgroessen
+
+Von 12.480 erfassten Zerspanungsbetrieben beschaeftigen 61,4 Prozent weniger als
+20 Personen. Der Anteil der Betriebe mit mehr als 100 Beschaeftigten liegt bei
+4,2 Prozent. Das Durchschnittsalter der Inhaber betraegt 54,6 Jahre.
+
+Seite 12, Nachfolge
+
+In den kommenden fuenf Jahren steht bei 3.900 Betrieben die Uebergabe an. Fuer
+1.150 davon ist zum Erhebungszeitpunkt keine Nachfolge geklaert.
+
+Seite 19, Stillstandszeiten
+
+Die durchschnittliche ungeplante Stillstandszeit je Maschine und Jahr liegt bei
+41 Stunden. Als haeufigste Einzelursache nennen die Betriebe mit 27 Prozent das
+Fehlen eines passenden Werkzeugs.

@@ -1,0 +1,14 @@
+SYNTHETIC EXAMPLE SOURCE - invented for the bundled example workspace, not real data.
+
+Beispielamt fuer Wirtschaftsbeobachtung
+Erhebung Digitalisierung im produzierenden Handwerk 2026
+Veroeffentlicht: 2026-06-18
+
+Von den befragten 2.140 Betrieben bestellen 38,5 Prozent Verbrauchsmaterial und
+Werkzeuge ueber Online-Shops. Vor drei Jahren waren es 19,2 Prozent.
+
+Als Grund gegen die Online-Bestellung nennen 46 Prozent die fehlende Angabe einer
+verbindlichen Lieferzeit.
+
+Eine Pflicht zur elektronischen Rechnung im zwischenbetrieblichen Verkehr gilt seit
+dem 1. Januar 2026 fuer alle Betriebe unabhaengig von der Groesse.

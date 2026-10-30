@@ -1,0 +1,11 @@
+{
+  "run_id": "zielgruppe-2026-10-16",
+  "findings_in": 9,
+  "supported": 9,
+  "partial": 0,
+  "unsupported": 0,
+  "unreachable": 0,
+  "kept": 9,
+  "raw_chars": 23769,
+  "curated_chars": 9659
+}

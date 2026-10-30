@@ -1,0 +1,46 @@
+{
+  "entries": [
+    {
+      "finding_id": "macro-step/betriebsgroessen",
+      "volatility": "structural",
+      "published": "2026-03-11",
+      "address": "daten/quellen/beispielverband-zerspanung-strukturbericht-2026.txt",
+      "kind": "local"
+    },
+    {
+      "finding_id": "macro-step/nachfolge",
+      "volatility": "market",
+      "published": "2026-03-11",
+      "address": "daten/quellen/beispielverband-zerspanung-strukturbericht-2026.txt",
+      "kind": "local"
+    },
+    {
+      "finding_id": "macro-step/stillstand",
+      "volatility": "market",
+      "published": "2026-03-11",
+      "address": "daten/quellen/beispielverband-zerspanung-strukturbericht-2026.txt",
+      "kind": "local"
+    },
+    {
+      "finding_id": "macro-step/hartmetallpreis",
+      "volatility": "price",
+      "published": "2026-08-05",
+      "address": "daten/quellen/beispielinstitut-konjunktur-metall-2026-08.txt",
+      "kind": "local"
+    },
+    {
+      "finding_id": "macro-step/onlinebestellung",
+      "volatility": "market",
+      "published": "2026-06-18",
+      "address": "daten/quellen/beispielamt-digitalisierung-handwerk-2026.txt",
+      "kind": "local"
+    },
+    {
+      "finding_id": "macro-step/erechnung",
+      "volatility": "structural",
+      "published": "2026-06-18",
+      "address": "daten/quellen/beispielamt-digitalisierung-handwerk-2026.txt",
+      "kind": "local"
+    }
+  ]
+}

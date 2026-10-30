@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Audit anfragen – RepoCity</title>
+<meta name="description" content="Audit der Sichtbarkeit Ihres Betriebs anfragen: Gesprächsart wählen, Wunschtermin aussuchen, absenden.">
+<link rel="canonical" href="https://repocity.speedofthespirit.dev/anfrage/">
+<meta name="theme-color" content="#02060f">
+<meta name="author" content="Daniel Hütte">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="preload" href="/fonts/archivo.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/syncopate-700.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/styles.css">
+<link rel="stylesheet" href="/anfrage.css">
+<script type="module" src="/js/herkunft.js"></script>
+<script type="module" src="/js/anfrage.js"></script>
+</head>
+<body class="seite-anfrage">
+<svg class="sprite" width="0" height="0" aria-hidden="true" focusable="false"><defs><linearGradient id="gold" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="100" y2="100"><stop offset="0" stop-color="#f3e3bf"/><stop offset="0.32" stop-color="#cdb07a"/><stop offset="0.55" stop-color="#9c7f52"/><stop offset="0.78" stop-color="#e2c993"/><stop offset="1" stop-color="#8a6c43"/></linearGradient><symbol id="symbol-repocity" viewBox="0 0 100 100"><g fill="url(#gold)"><path fill-rule="evenodd" d="M50 2.5a47.5 47.5 0 1 1 0 95a47.5 47.5 0 1 1 0-95zm0 5a42.5 42.5 0 1 0 0 85a42.5 42.5 0 1 0 0-85z"/><rect x="31.8" y="46.3" width="8.8" height="18"/><rect x="47.1" y="24.9" width="8.8" height="39.4"/><rect x="62.6" y="36.6" width="8.8" height="27.7"/><rect x="12.4" y="64.9" width="75.2" height="4.4"/></g></symbol></defs></svg>
+<a class="skip" href="#anfrage">Zum Formular</a>
+<header class="leiste wrap"><a class="marke-klein" href="/" aria-label="RepoCity, zur Startseite"><svg class="marke-klein__zeichen" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="#symbol-repocity"/></svg><span class="marke-klein__name"><strong>REPOCITY</strong><span>AI FOR EVERYONE</span></span></a></header>
+<main class="wrap anfrage">
+<div class="anfrage__kopf">
+<p class="anfrage__produkt">RadarAuditor</p>
+<h1 class="anfrage__titel">Audit anfragen</h1>
+<p class="anfrage__satz">Wir prüfen, wie gut Ihr Betrieb im Netz gefunden wird, und besprechen das Ergebnis mit Ihnen: vor Ort, am Telefon oder per Video. Wählen Sie Gesprächsart und Wunschtermin.</p>
+</div>
+<div class="anfrage__karte">
+<noscript><p class="formular__meldung">Das Formular braucht JavaScript. Bitte schalten Sie es für diese Seite ein.</p></noscript>
+<form class="formular" id="anfrage" data-anfrage novalidate>
+<div class="feld">
+<label class="feld__name" for="feld-company">Betrieb</label>
+<input class="feld__eingabe" id="feld-company" name="company" type="text" autocomplete="organization" minlength="2" maxlength="200" required aria-describedby="fehler-company">
+<p class="feld__fehler" id="fehler-company" hidden></p>
+</div>
+<div class="feld">
+<label class="feld__name" for="feld-contact">Ansprechpartner</label>
+<input class="feld__eingabe" id="feld-contact" name="contact" type="text" autocomplete="name" minlength="2" maxlength="200" required aria-describedby="fehler-contact">
+<p class="feld__fehler" id="fehler-contact" hidden></p>
+</div>
+<div class="feld">
+<label class="feld__name" for="feld-email">E-Mail</label>
+<input class="feld__eingabe" id="feld-email" name="email" type="email" inputmode="email" autocomplete="email" autocapitalize="off" spellcheck="false" maxlength="200" required aria-describedby="fehler-email">
+<p class="feld__fehler" id="fehler-email" hidden></p>
+</div>
+<div class="feld">
+<label class="feld__name" for="feld-phone">Telefon</label>
+<input class="feld__eingabe" id="feld-phone" name="phone" type="tel" autocomplete="tel" maxlength="40" required aria-describedby="fehler-phone">
+<p class="feld__fehler" id="fehler-phone" hidden></p>
+</div>
+<div class="feld">
+<label class="feld__name" for="feld-website">Webseiten-Adresse <span class="feld__frei">(freiwillig)</span></label>
+<input class="feld__eingabe" id="feld-website" name="website" type="text" inputmode="url" autocomplete="url" autocapitalize="off" spellcheck="false" maxlength="300" placeholder="betrieb.de" aria-describedby="fehler-website">
+<p class="feld__fehler" id="fehler-website" hidden></p>
+</div>
+<fieldset class="feld feld--gruppe" id="gruppe-kind" tabindex="-1" aria-describedby="fehler-kind">
+<legend class="feld__name">Gesprächsart</legend>
+<div class="arten">
+<label class="art"><input type="radio" name="kind" value="visit" required><span>Vor Ort</span></label>
+<label class="art"><input type="radio" name="kind" value="call" required><span>Telefon</span></label>
+<label class="art"><input type="radio" name="kind" value="video" required><span>Video</span></label>
+</div>
+<p class="feld__fehler" id="fehler-kind" hidden></p>
+</fieldset>
+<div class="feld" data-anschrift hidden>
+<label class="feld__name" for="feld-address">Anschrift</label>
+<textarea class="feld__eingabe feld__eingabe--text" id="feld-address" name="address" rows="2" autocomplete="street-address" maxlength="300" aria-describedby="fehler-address"></textarea>
+<p class="feld__fehler" id="fehler-address" hidden></p>
+</div>
+<fieldset class="feld feld--gruppe" id="gruppe-starts_at" tabindex="-1" aria-describedby="hinweis-termine fehler-starts_at">
+<legend class="feld__name">Wunschtermin</legend>
+<p class="feld__hinweis" id="hinweis-termine">Deutsche Zeit, jeder Termin dauert eine Stunde.</p>
+<div class="termine" data-termine>
+<p class="termine__stand" data-termine-stand role="status">Bitte zuerst die Gesprächsart wählen.</p>
+<div class="termine__liste" data-termine-liste></div>
+</div>
+<p class="feld__fehler" id="fehler-starts_at" hidden></p>
+</fieldset>
+<div class="feld">
+<label class="feld__name" for="feld-message">Nachricht <span class="feld__frei">(freiwillig)</span></label>
+<textarea class="feld__eingabe feld__eingabe--text" id="feld-message" name="message" rows="4" maxlength="5000" aria-describedby="fehler-message"></textarea>
+<p class="feld__fehler" id="fehler-message" hidden></p>
+</div>
+<p class="formular__meldung" data-meldung role="alert" hidden></p>
+<button class="formular__senden" type="submit">Audit anfragen</button>
+</form>
+<p class="formular__hinweis">Wie wir Ihre Angaben verarbeiten, steht in der <a href="https://speedofthespirit.dev/datenschutz/">Datenschutzerklärung</a>.</p>
+</div>
+</main>
+<footer class="fuss"><div class="wrap fuss__reihe"><p class="fuss__marke"><svg class="fuss__zeichen" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="#symbol-repocity"/></svg><span>RepoCity, Münster</span></p><nav aria-label="Hauptseite"><ul><li><a href="https://speedofthespirit.dev/de/">Hauptseite</a></li><li><a href="https://speedofthespirit.dev/impressum/">Impressum</a></li><li><a href="https://speedofthespirit.dev/datenschutz/">Datenschutz</a></li></ul></nav></div></footer>
+</body>
+</html>

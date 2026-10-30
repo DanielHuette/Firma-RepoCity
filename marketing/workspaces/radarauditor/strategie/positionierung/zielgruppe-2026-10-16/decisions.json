@@ -1,0 +1,59 @@
+{
+  "run_id": "zielgruppe-2026-10-16",
+  "decisions": [
+    {
+      "finding_id": "audience/ki-chats-statt-suchmaschine",
+      "keep": true,
+      "note": "kept by verdict, not by a person",
+      "decided": "2026-10-16"
+    },
+    {
+      "finding_id": "audience/generative-ki-nutzung",
+      "keep": true,
+      "note": "kept by verdict, not by a person",
+      "decided": "2026-10-16"
+    },
+    {
+      "finding_id": "audience/handwerkersuche-webseite-ausschluss",
+      "keep": true,
+      "note": "kept by verdict, not by a person",
+      "decided": "2026-10-16"
+    },
+    {
+      "finding_id": "audience/arztbewertungen-online",
+      "keep": true,
+      "note": "kept by verdict, not by a person",
+      "decided": "2026-10-16"
+    },
+    {
+      "finding_id": "audience/google-maps-bewertungen",
+      "keep": true,
+      "note": "kept by verdict, not by a person",
+      "decided": "2026-10-16"
+    },
+    {
+      "finding_id": "audience/handwerksbetriebe-deutschland",
+      "keep": true,
+      "note": "kept by verdict, not by a person",
+      "decided": "2026-10-16"
+    },
+    {
+      "finding_id": "audience/handwerk-kammerbezirk-muenster",
+      "keep": true,
+      "note": "kept by verdict, not by a person",
+      "decided": "2026-10-16"
+    },
+    {
+      "finding_id": "audience/handwerk-sichtbarkeit-ki",
+      "keep": true,
+      "note": "kept by verdict, not by a person",
+      "decided": "2026-10-16"
+    },
+    {
+      "finding_id": "audience/digitale-intensitaet-kleine-unternehmen",
+      "keep": true,
+      "note": "kept by verdict, not by a person",
+      "decided": "2026-10-16"
+    }
+  ]
+}

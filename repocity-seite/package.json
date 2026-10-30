@@ -1,0 +1,13 @@
+{
+  "name": "repocity-seite",
+  "private": true,
+  "type": "module",
+  "description": "Browser checks and preview image of the RepoCity company page.",
+  "scripts": {
+    "pruefen": "node tests/pruefen.cjs",
+    "vorschau": "node bau/vorschau.cjs"
+  },
+  "devDependencies": {
+    "playwright": "1.63.0"
+  }
+}

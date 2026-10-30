@@ -1,0 +1,12 @@
+{
+  "run_id": "makroanalyse-2026-08-29",
+  "decisions": [
+    { "finding_id": "macro-step/betriebsgroessen", "keep": true, "note": null, "decided": "2026-08-29" },
+    { "finding_id": "macro-step/nachfolge", "keep": true, "note": "Ableitung ist unsere, steht als Prognose drin", "decided": "2026-08-29" },
+    { "finding_id": "macro-step/stillstand", "keep": true, "note": null, "decided": "2026-08-29" },
+    { "finding_id": "macro-step/hartmetallpreis", "keep": true, "note": null, "decided": "2026-08-29" },
+    { "finding_id": "macro-step/onlinebestellung", "keep": true, "note": null, "decided": "2026-08-29" },
+    { "finding_id": "macro-step/erechnung", "keep": true, "note": null, "decided": "2026-08-29" },
+    { "finding_id": "macro-step/marktvolumen", "keep": false, "note": "11,4 Prozent steht in keiner Quelle, die Zahl stammt aus einer Messe-Erinnerung", "decided": "2026-08-29" }
+  ]
+}

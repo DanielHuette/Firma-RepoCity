@@ -1,0 +1,176 @@
+# Phone assistant on the RepoCity server: business number -> LiveKit SIP -> LiveKit -> agent,
+# with speech recognition, voice and language model on the server's graphics card.
+# Every value comes from .env next to this file; see .env.example and README.md.
+# All services use the host network: SIP and its media ports must be reachable from the
+# provider, everything else listens on 127.0.0.1 only.
+
+name: repocity-telefon
+
+x-livekit-access: &livekit-access
+  LIVEKIT_URL: ws://127.0.0.1:7880
+  LIVEKIT_API_KEY: ${LIVEKIT_API_KEY:?set LIVEKIT_API_KEY in .env}
+  LIVEKIT_API_SECRET: ${LIVEKIT_API_SECRET:?set LIVEKIT_API_SECRET in .env}
+
+x-gpu: &gpu
+  deploy:
+    resources:
+      reservations:
+        devices:
+          - driver: nvidia
+            count: all
+            capabilities: [gpu]
+
+services:
+  redis:
+    image: valkey/valkey:9.0.6-alpine
+    network_mode: host
+    command: ["valkey-server", "--bind", "127.0.0.1", "--port", "6379", "--save", "", "--appendonly", "no"]
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "valkey-cli", "-h", "127.0.0.1", "ping"]
+      interval: 10s
+      timeout: 3s
+      retries: 5
+
+  livekit:
+    image: livekit/livekit-server:v1.13.10
+    network_mode: host
+    command: ["--config", "/etc/livekit.yaml"]
+    environment:
+      LIVEKIT_KEYS: "${LIVEKIT_API_KEY}: ${LIVEKIT_API_SECRET}"
+      NODE_IP: 127.0.0.1
+    volumes:
+      - ./config/livekit.yaml:/etc/livekit.yaml:ro
+    depends_on:
+      redis: { condition: service_healthy }
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "wget", "-q", "-O", "/dev/null", "http://127.0.0.1:7880/"]
+      interval: 10s
+      timeout: 3s
+      retries: 5
+
+  livekit-sip:
+    image: livekit/sip:v1.21.0
+    network_mode: host
+    environment:
+      SIP_CONFIG_BODY: |
+        api_key: ${LIVEKIT_API_KEY}
+        api_secret: ${LIVEKIT_API_SECRET}
+        ws_url: ws://127.0.0.1:7880
+        redis:
+          address: 127.0.0.1:6379
+        sip_port: 5060
+        rtp_port: 10000-20000
+        use_external_ip: true
+        health_port: 8082
+        logging:
+          level: info
+    depends_on:
+      livekit: { condition: service_healthy }
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "bash", "-c", "exec 3<>/dev/tcp/127.0.0.1/8082 && printf 'GET / HTTP/1.0\\r\\n\\r\\n' >&3 && head -n 1 <&3 | grep -q ' 200 '"]
+      interval: 15s
+      timeout: 3s
+      retries: 5
+
+  ollama:
+    <<: *gpu
+    image: ollama/ollama:0.40.11
+    network_mode: host
+    environment:
+      OLLAMA_HOST: 127.0.0.1:11434
+      OLLAMA_KEEP_ALIVE: 30m
+    volumes:
+      - ollama:/root/.ollama
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "ollama", "list"]
+      interval: 15s
+      timeout: 5s
+      retries: 5
+
+  # Pulls the model on the first start; later starts only check that it is there.
+  ollama-pull:
+    image: ollama/ollama:0.40.11
+    network_mode: host
+    environment:
+      OLLAMA_HOST: 127.0.0.1:11434
+    entrypoint: ["ollama", "pull", "${OLLAMA_MODEL:?set OLLAMA_MODEL in .env}"]
+    depends_on:
+      ollama: { condition: service_healthy }
+    restart: "no"
+
+  speech:
+    <<: *gpu
+    build: { context: ., target: speech }
+    image: repocity-telefon-speech
+    network_mode: host
+    environment:
+      WHISPER_MODEL: ${WHISPER_MODEL:?set WHISPER_MODEL in .env}
+      WHISPER_DEVICE: ${WHISPER_DEVICE:?set WHISPER_DEVICE in .env}
+      WHISPER_COMPUTE_TYPE: ${WHISPER_COMPUTE_TYPE:?set WHISPER_COMPUTE_TYPE in .env}
+      PIPER_VOICE: ${PIPER_VOICE:?set PIPER_VOICE in .env}
+      SPEECH_MODEL_DIR: /models
+      # 127.0.0.1 unless .env sets SPEECH_HOST=0.0.0.0 for the RadarAuditor worker on this server
+      # (Cockpit assistant); the firewall then keeps the port closed to the outside.
+      SPEECH_HOST: ${SPEECH_HOST:-127.0.0.1}
+      SPEECH_PORT: "8090"
+    volumes:
+      - speech-models:/models
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8090/health', timeout=3)"]
+      interval: 15s
+      timeout: 5s
+      retries: 5
+      start_period: 15m
+
+  agent:
+    build: { context: ., target: agent }
+    image: repocity-telefon-agent
+    network_mode: host
+    environment:
+      <<: *livekit-access
+      SUPABASE_URL: ${SUPABASE_URL:?set SUPABASE_URL in .env}
+      SUPABASE_SERVICE_KEY: ${SUPABASE_SERVICE_KEY:?set SUPABASE_SERVICE_KEY in .env}
+      OLLAMA_URL: http://127.0.0.1:11434
+      OLLAMA_MODEL: ${OLLAMA_MODEL}
+      SPEECH_URL: http://127.0.0.1:8090
+      MAX_CALL_MINUTES: ${MAX_CALL_MINUTES:-15}
+      AGENT_HEALTH_PORT: "8081"
+    depends_on:
+      livekit: { condition: service_healthy }
+      speech: { condition: service_healthy }
+      ollama-pull: { condition: service_completed_successfully }
+    restart: unless-stopped
+    # On stop the agent takes no new calls and lets running ones finish and be stored; Docker's
+    # default of 10 seconds would cut them off. Longest call (60 minutes) plus storing it.
+    stop_grace_period: 65m
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8081/', timeout=3)"]
+      interval: 15s
+      timeout: 5s
+      retries: 5
+      start_period: 1m
+
+  # One-off: creates or updates the inbound trunk and the dispatch rule.
+  # docker compose run --rm sip-setup
+  sip-setup:
+    image: repocity-telefon-agent
+    build: { context: ., target: agent }
+    network_mode: host
+    profiles: [setup]
+    command: ["telefon-sip-setup"]
+    environment:
+      <<: *livekit-access
+      SIP_NUMBER: ${SIP_NUMBER:-}
+      SIP_TRUNK_HOST: ${SIP_TRUNK_HOST:-}
+      SIP_TRUNK_USER: ${SIP_TRUNK_USER:-}
+      SIP_TRUNK_PASSWORD: ${SIP_TRUNK_PASSWORD:-}
+      MAX_CALL_MINUTES: ${MAX_CALL_MINUTES:-15}
+
+volumes:
+  ollama:
+  speech-models:

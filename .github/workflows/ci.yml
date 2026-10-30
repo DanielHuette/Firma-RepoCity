@@ -1,0 +1,87 @@
+name: ci
+on: [push, pull_request]
+
+jobs:
+  integration:
+    runs-on: ubuntu-24.04
+    defaults: { run: { working-directory: integration } }
+    env:
+      # PostgreSQL 16 ships with the runner image; the tests refuse to pass silently without it.
+      REPOCITY_PG_BIN: /usr/lib/postgresql/16/bin
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v4
+      - run: test -x "$REPOCITY_PG_BIN/initdb"
+      - run: uv sync --locked
+      - run: uv run ruff check . && uv run ruff format --check .
+      - run: uv run mypy src tests
+      - run: uv run pytest
+
+  telefon:
+    runs-on: ubuntu-24.04
+    defaults: { run: { working-directory: telefon } }
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v4
+      - run: uv sync --locked --extra agent --extra speech
+      - run: uv run ruff check . && uv run ruff format --check .
+      - run: uv run mypy src tests
+      - run: uv run pytest
+
+  app:
+    runs-on: ubuntu-24.04
+    strategy:
+      matrix:
+        include:
+          - { app: crm }
+          - { app: cockpit }
+    defaults: { run: { working-directory: "${{ matrix.app }}/app" } }
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: ${{ matrix.app }}/app/package-lock.json
+      - run: npm ci
+      - run: npm run check
+      - run: npm test
+      - run: npm run build
+
+  edge-functions:
+    runs-on: ubuntu-24.04
+    strategy:
+      matrix:
+        include:
+          - folder: crm/supabase/functions/crm-mail
+            check: deno check *.ts pdf/*.ts testing/*.ts && deno lint
+            test: deno test --allow-env --allow-read
+          - folder: crm/supabase/functions/crm-calendar
+            check: deno check *.ts && deno lint
+            test: deno test --allow-env --allow-read
+          - folder: crm/supabase/functions/crm-abmelden
+            check: deno check *.ts && deno lint
+            test: deno test --allow-env --allow-read
+          - folder: crm/supabase/functions/crm-termin
+            check: deno check *.ts && deno lint
+            test: deno test --allow-env --allow-read
+          - folder: crm/supabase/functions/_shared
+            check: deno check *.ts && deno lint
+            test: deno test --allow-env --allow-read
+          - folder: cockpit
+            check: deno check supabase/functions/cockpit-push/index.ts deploy/cockpit-push.ts
+            test: deno test --allow-read supabase/functions/cockpit-push deploy
+    defaults: { run: { working-directory: "${{ matrix.folder }}" } }
+    steps:
+      - uses: actions/checkout@v4
+      - uses: denoland/setup-deno@v2
+        with:
+          deno-version: v2.9.6
+      - run: ${{ matrix.check }}
+      - run: ${{ matrix.test }}
+      # The Supabase Edge Runtime runs an older Deno; types are stripped there, so the tests run
+      # once more on the 2.1 line without type checking.
+      - uses: denoland/setup-deno@v2
+        with:
+          deno-version: v2.1.4
+      - run: ${{ matrix.test }} --no-check

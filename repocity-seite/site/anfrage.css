@@ -1,0 +1,322 @@
+/* Audit request form (site/anfrage/index.html), on top of styles.css: same night blue, same gold.
+   Phone first: one column; from 900 px the heading stands beside the form. Gold marks what is
+   chosen or focused, the error colour only what needs fixing. */
+
+.seite-anfrage {
+  --fehler: #f2a79e;
+  --fehler-linie: rgba(242, 167, 158, 0.7);
+  --feld-grund: rgba(2, 6, 15, 0.55);
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+
+.anfrage {
+  display: grid;
+  gap: 28px;
+  padding-block: 12px 56px;
+}
+
+.anfrage__kopf {
+  display: grid;
+  gap: 14px;
+  align-content: start;
+}
+
+.anfrage__produkt {
+  font-family: var(--font-display);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+
+.anfrage__titel {
+  font-size: clamp(2rem, 7vw, 3.1rem);
+  color: var(--gold-strong);
+}
+
+.anfrage__satz {
+  max-width: 46ch;
+  color: var(--ink-2);
+}
+
+.anfrage__karte {
+  display: grid;
+  gap: 18px;
+  padding: 22px 18px;
+  border: 1px solid var(--line);
+  border-radius: 22px;
+  background: var(--surface);
+  box-shadow: var(--shadow);
+}
+
+@media (min-width: 900px) {
+  .anfrage {
+    grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+    gap: 56px;
+    padding-block: 40px 88px;
+  }
+
+  .anfrage__kopf {
+    position: sticky;
+    top: 32px;
+  }
+
+  .anfrage__karte {
+    padding: 34px 36px;
+  }
+}
+
+.formular {
+  display: grid;
+  gap: 20px;
+}
+
+.feld {
+  display: grid;
+  gap: 8px;
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+.feld[hidden] {
+  display: none;
+}
+
+.feld__name {
+  padding: 0;
+  font-weight: 650;
+  font-size: 0.95rem;
+  color: var(--ink);
+}
+
+.feld__frei,
+.feld__hinweis {
+  font-weight: 400;
+  color: var(--muted);
+}
+
+.feld__hinweis {
+  font-size: 0.85rem;
+}
+
+.feld__eingabe {
+  width: 100%;
+  min-height: 50px;
+  padding: 12px 14px;
+  border: 1px solid var(--line-weiss);
+  border-radius: 12px;
+  background: var(--feld-grund);
+  color: var(--ink);
+  font: inherit;
+  font-size: 1rem;
+  transition: border-color 0.2s ease;
+}
+
+.feld__eingabe--text {
+  resize: vertical;
+  line-height: 1.5;
+}
+
+.feld__eingabe::placeholder {
+  color: var(--muted);
+  opacity: 0.7;
+}
+
+.feld__eingabe:hover {
+  border-color: var(--line-gold);
+}
+
+.feld__eingabe:focus-visible {
+  border-color: var(--gold);
+  outline: 2px solid var(--gold-light);
+  outline-offset: 2px;
+}
+
+.feld__eingabe[aria-invalid="true"] {
+  border-color: var(--fehler-linie);
+}
+
+.feld__fehler {
+  color: var(--fehler);
+  font-size: 0.9rem;
+  line-height: 1.45;
+}
+
+.feld--gruppe:focus {
+  outline: none;
+}
+
+/* Kind of meeting: three tiles; the real radio stays in the tab order, the tile shows its state. */
+.arten {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.art,
+.zeit {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 48px;
+  padding: 8px 10px;
+  border: 1px solid var(--line-weiss);
+  border-radius: 12px;
+  background: var(--feld-grund);
+  color: var(--ink);
+  font-weight: 600;
+  font-size: 0.95rem;
+  text-align: center;
+  cursor: pointer;
+  transition: border-color 0.2s ease, background-color 0.2s ease, color 0.2s ease;
+}
+
+.art input,
+.zeit input {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.art:hover,
+.zeit:hover {
+  border-color: var(--gold);
+  color: var(--gold-light);
+}
+
+.art:has(input:focus-visible),
+.zeit:has(input:focus-visible) {
+  outline: 2px solid var(--gold-light);
+  outline-offset: 2px;
+}
+
+.art:has(input:checked),
+.zeit:has(input:checked) {
+  border-color: var(--gold-strong);
+  background: var(--gold-knopf);
+  color: #120d04;
+}
+
+.art:has(input[aria-invalid="true"]),
+.zeit:has(input[aria-invalid="true"]) {
+  border-color: var(--fehler-linie);
+}
+
+/* Free slots: one block per day, scrolling inside the card so the send button stays near. */
+.termine {
+  display: grid;
+  gap: 12px;
+}
+
+.termine__stand {
+  color: var(--ink-2);
+  font-size: 0.95rem;
+}
+
+.termine__stand[hidden] {
+  display: none;
+}
+
+.termine__neu {
+  min-height: 44px;
+  padding: 0 14px;
+  border: 1px solid var(--line-gold);
+  border-radius: 999px;
+  background: transparent;
+  color: var(--gold-light);
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.termine__liste {
+  display: grid;
+  gap: 16px;
+  max-height: 26rem;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  padding-right: 4px;
+}
+
+.termine__liste:empty {
+  display: none;
+}
+
+.termine__tag {
+  display: grid;
+  gap: 8px;
+}
+
+.termine__datum {
+  font-weight: 650;
+  font-size: 0.9rem;
+  color: var(--gold-light);
+}
+
+.termine__zeiten {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: 8px;
+}
+
+.zeit {
+  font-variant-numeric: tabular-nums;
+}
+
+.formular__meldung {
+  padding: 12px 14px;
+  border: 1px solid var(--fehler-linie);
+  border-radius: 12px;
+  color: var(--fehler);
+  font-size: 0.95rem;
+}
+
+.formular__meldung[hidden] {
+  display: none;
+}
+
+.formular__senden {
+  justify-self: stretch;
+  min-height: 54px;
+  padding: 0 28px;
+  border: 0;
+  border-radius: 999px;
+  background: var(--gold-knopf);
+  color: #120d04;
+  font: inherit;
+  font-weight: 700;
+  font-size: 1.02rem;
+  letter-spacing: 0.01em;
+  cursor: pointer;
+  box-shadow: 0 10px 28px rgba(201, 169, 110, 0.22);
+  transition: filter 0.2s ease, box-shadow 0.2s ease;
+}
+
+.formular__senden:hover {
+  filter: brightness(1.06);
+  box-shadow: 0 12px 34px rgba(201, 169, 110, 0.34);
+}
+
+.formular__senden:disabled {
+  cursor: progress;
+  filter: saturate(0.6) brightness(0.85);
+}
+
+@media (min-width: 600px) {
+  .formular__senden {
+    justify-self: start;
+  }
+}
+
+.formular__hinweis {
+  color: var(--muted);
+  font-size: 0.85rem;
+}

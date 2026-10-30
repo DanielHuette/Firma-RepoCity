@@ -1,0 +1,34 @@
+# Recherchenotizen – zielgruppe-2026-10-16
+
+Abruf aller Seiten am 2026-10-16. Methode: Jede Seite wurde per curl geladen, in reinen Text umgewandelt und jede Zahl mit einem Skript wörtlich im Seitentext gesucht (Treffer müssen exakt so geschrieben sein, z. B. „1.038.126“, „33,4“). Zusätzlich wurde jede genutzte Seite mit WebFetch gegengeprüft (Zitat und Datum). Ein Prüfskript stellt außerdem sicher, dass in Überschrift und Text eines Findings keine Zahl steht, die nicht in `figures` aufgeführt ist.
+
+## Genutzte Seiten
+
+| Seite | Ergebnis |
+|---|---|
+| Bitkom, „Internet-Suche im Wandel: Die Hälfte nutzt bereits KI-Chats“, 20.11.2025 – https://www.bitkom.org/Presse/Presseinformation/Internet-Suche-Wandel-Haelfte-nutzt-KI-Chats | Genutzt → 001 (50, 24, 1.156). Weitere wörtliche Zahlen auf der Seite: 25, 13, 7, 5, 47 Prozent zur Nutzungsverteilung, 42 Prozent haben falsche KI-Antworten erhalten, 57 Prozent prüfen sie. |
+| Bitkom, „KI-Nutzung boomt …“, 05.05.2025 – https://www.bitkom.org/Presse/Presseinformation/KI-Nutzung-boomt-Angst-vor-Abhaengigkeit-Ausland-gross | Genutzt → 002 (67, 43, 28, 1.005). Auf der Seite steht außerdem: Copilot 39 Prozent, Perplexity 1 Prozent, Vorjahressommer 40 Prozent. Achtung: Die WebFetch-Zusammenfassung paraphrasierte den Satz zu 67 Prozent falsch; maßgeblich ist der Rohtext „zwei Drittel (67 Prozent) der Bundesbürgerinnen und Bundesbürger ab 16 Jahren“. |
+| Bitkom, „Handwerkersuche: Persönliches Gespräch schlägt Infos im Netz“, 12.06.2025 – https://www.bitkom.org/Presse/Presseinformation/Handwerkersuche-Gespraech-schlaegt-Netz | Genutzt → 003 (40, 55, 1.004). Ehrlicher Gegenpunkt auf derselben Seite: 83 Prozent holen sich Rat im persönlichen Umfeld, nur 26 Prozent klicken sich durch Webseiten, 15 Prozent ziehen Online-Kundenbewertungen heran. Für die Kampagne nicht als „Online ist alles“ verkaufen. |
+| Bitkom, „Mehr als die Hälfte liest Arzt-Bewertungen im Internet“, 06.02.2023 – https://www.bitkom.org/Presse/Presseinformation/Haelfte-liest-Arzt-Bewertungen-Internet | Genutzt → 004 (55, 57, 1.144). Zahnärzte nicht separat ausgewiesen. Älter (2023), aber aktuellste gefundene Bitkom-Zahl zu Praxisbewertungen. |
+| leinetal24 / KNA, „Umfrage: So steuern Google-Bewertungen alltägliche Entscheidungen“, 24.04.2026 – https://www.leinetal24.de/welt/umfrage-so-steuern-google-bewertungen-alltaegliche-entscheidungen-zr-94277454.html | Genutzt → 005 (13, 6, 24, 2.178). Sekundärquelle (Agenturmeldung über YouGov-Umfrage für das SZ Dossier); Primärquelle nicht frei zugänglich. Weitere Zahlen: 27 Prozent selten, 18 Prozent nie. |
+| ZDH, „Kennzahlen des Handwerks 2025“, Stand Juni 2026 – https://www.zdh.de/daten-und-fakten/kennzahlen-des-handwerks/wirtschaftlicher-stellenwert-des-handwerks-2025/ | Genutzt → 006 (1.038.126, 783). Seite nennt nur „Stand: Juni 2026“, kein Tagesdatum → `published: "2026-06"`. Weitere Zahlen: BV-Verhältnisse 6.237 (in 1 000), Lehrlinge 346.388. |
+| Deutsches Handwerksblatt, „Die Handwerkskonjunktur kühlt ab“, 24.04.2026 – https://www.handwerksblatt.de/die-handwerkskammern-in-deutschland/hwk-munster/die-handwerkskonjunktur-kuehlt-ab | Genutzt → 007 (30.749, 210.000, 33,4). Gibt Angaben der HWK Münster wieder (Stand 31.12.2025). Bezieht sich auf den ganzen Kammerbezirk (Münsterland + Emscher-Lippe). |
+| Bitkom, „Handwerk: Azubis machen Betriebe fit für die Digitalisierung“, 28.08.2025 – https://www.bitkom.org/Presse/Presseinformation/Handwerk-Azubis-Betriebe-Digitalisierung | Genutzt → 008 (75, 4, 504). Vorsicht: „75 Prozent“ steht auf der Seite zweimal (auch Fachkräftemangel); im Finding ist der Satz „erhöhte Sichtbarkeit gegenüber der Kundschaft (75 Prozent)“ gemeint. Weitere Zahlen: 48 Prozent bieten Online-Terminbuchung, 72 Prozent haben zu viel zu tun für Digitalisierung. |
+| Bundesnetzagentur, „Digitalisierung im Mittelstand in Zahlen“ – https://bundesnetzagentur.de/DE/Fachthemen/Digitales/Mittelstand/Kennzahlen/artikel.html | Genutzt → 009 (29, 39). Kein Veröffentlichungsdatum auf der Seite (nur „© Bundesnetzagentur - 2026“, Eurostat-Daten abgerufen am 27.06.2025) → `published` weggelassen. |
+
+## Angesehen, aber nicht genutzt
+
+| Seite | Grund |
+|---|---|
+| Bitkom/ZDH, „Roboter, Drohnen, smarte Software: Das Handwerk wird digitaler“, 01.07.2022 – https://www.bitkom.org/Presse/Presseinformation/Handwerk-wird-digitaler | Zahlen wörtlich vorhanden (97 Prozent mit eigener Website, 76 Prozent in Online-Verzeichnissen, 27 Prozent auf Bewertungsplattform), aber von 2022 und durch die 2025er Studie ersetzt. WICHTIG: widerspricht der Annahme „viele Handwerker haben keine Website“ – diese Behauptung NICHT in der Kampagne verwenden. |
+| Bitkom, „Zwischen Tradition und Innovation: Das Handwerk wird digital“, 02.03.2017 | Zu alt (95 Prozent Website, 89 Prozent in Online-Verzeichnissen inkl. Google Maps). |
+| Bitkom, „Ein Drittel liest Online-Bewertungen vor dem Arztbesuch“, 31.08.2021 | Zahlen vorhanden (34 Prozent achten auf Bewertungen, 79 Prozent Nähe zum Wohnort), aber durch die Mitteilung von 2023 überholt. |
+| Bitkom, „Ein Drittel hat Interesse an Online-Handwerksportalen“, 27.02.2024 | Wörtlich verifizierbar (31 Prozent Interesse, 11 Prozent genutzt), aber für Sichtbarkeit weniger relevant; als Reserve. |
+| Bitkom, „Online-Bewertungen sind wichtigste Informationsquelle“, 27.11.2020 | Zu alt und auf Online-Shopping bezogen, nicht auf lokale Betriebe. |
+| BrightLocal, „Local Consumer Review Survey 2025“, 29.01.2025 – https://www.brightlocal.com/research/local-consumer-review-survey-2025/ | US-Befragung; die meisten Kennzahlen stehen nur in Grafiken, nicht im Text. Im Text wörtlich: „just 4% of consumers say they ‘never’ read online business reviews“, 6% nutzen ChatGPT/KI für Bewertungen. Deutsche Quellen reichten, daher nicht genutzt. |
+| BrightLocal-URL …/local-consumer-review-survey/2026/ | Leitet inhaltlich auf die Ausgabe 2023 (canonical …-2023) weiter, irreführende URL → verworfen. |
+| ms-aktuell.de, „Handwerk im Kammerbezirk Münster bleibt stabil“, 16.01.2026 | Per curl 403 (Bot-Sperre), nur per WebFetch lesbar: 30.749 Betriebe, 2.933 Existenzgründungen, 43 Prozent der Inhaber über 55. Nicht genutzt, weil die Seite nicht zuverlässig abrufbar ist; die Betriebszahl ist über das Handwerksblatt belegt. |
+| Deutsches Handwerksblatt, „Handwerk unter Druck – Hoffnung auf Entlastung bleibt“ | Nur Konjunkturdaten (542 Betriebe befragt), keine Sichtbarkeitszahlen. |
+| HWK Münster „Auf einen Blick Kammerbezirk Münster“ (31.12.2024/2025), Konjunkturberichte | Nur als PDF verfügbar → gemäß Vorgabe nicht genutzt. |
+| land.nrw, Pressemitteilung Handwerksbericht NRW | TLS-Verbindungsfehler beim Abruf; NRW-Zahlen daher nicht bestätigt. |
+| IT.NRW, Statista, Destatis-PDFs zum Anteil von Unternehmen mit Website | PDF bzw. Statista (Paywall/JS) → nicht genutzt. Eine HTML-Pressemitteilung von Destatis mit aktuellem Website-Anteil kleiner Unternehmen wurde nicht gefunden. |

@@ -1,0 +1,17 @@
+# LiveKit server of the phone assistant. Only the SIP bridge and the agent on the same machine
+# connect to it, so it listens on the loopback address; the API keys come from LIVEKIT_KEYS,
+# which docker-compose.yml builds from .env.
+port: 7880
+bind_addresses:
+  - 127.0.0.1
+rtc:
+  tcp_port: 7881
+  port_range_start: 50000
+  port_range_end: 50200
+  use_external_ip: false
+redis:
+  address: 127.0.0.1:6379
+room:
+  empty_timeout: 60
+logging:
+  level: info

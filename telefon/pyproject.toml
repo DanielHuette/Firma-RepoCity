@@ -1,0 +1,71 @@
+[project]
+name = "repocity-telefon"
+version = "0.1.0"
+description = "Phone assistant of RepoCity: answers calls on the business number with self-hosted speech and language models"
+requires-python = ">=3.12,<3.14"
+readme = "README.md"
+dependencies = [
+  "pydantic>=2.9",
+  "pydantic-settings>=2.6",
+  "httpx>=0.28",
+  "tenacity>=9.0",
+]
+
+[project.optional-dependencies]
+agent = [
+  "livekit-agents>=1.8.9,<2",
+  "livekit-plugins-silero>=1.8.9,<2",
+  "livekit-api>=1.2.2,<2",
+]
+speech = [
+  "faster-whisper>=1.2.1",
+  "piper-tts>=1.8.0",
+  "fastapi>=0.115",
+  "uvicorn>=0.32",
+  "numpy>=1.26",
+]
+gpu = [
+  "nvidia-cublas-cu12>=12.4,<13",
+  "nvidia-cudnn-cu12>=9.1,<10",
+]
+
+[project.scripts]
+telefon-agent = "repocity_telefon.worker:main"
+telefon-sip-setup = "repocity_telefon.sip_setup:main"
+telefon-speech = "repocity_telefon.speech_service.server:main"
+
+[dependency-groups]
+dev = ["pytest>=8.3", "pytest-asyncio>=0.24", "ruff>=0.8", "mypy>=1.13"]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/repocity_telefon"]
+
+[tool.uv]
+default-groups = ["dev"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py312"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "B", "UP", "N", "D"]
+pydocstyle = { convention = "google" }
+
+[tool.ruff.lint.per-file-ignores]
+"tests/*" = ["D101", "D102", "D103", "D107"]
+
+[tool.mypy]
+strict = true
+python_version = "3.12"
+
+[[tool.mypy.overrides]]
+module = ["faster_whisper.*"]
+ignore_missing_imports = true
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+asyncio_mode = "auto"

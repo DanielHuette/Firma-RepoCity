@@ -1,0 +1,34 @@
+[project]
+name = "repocity-seite"
+version = "1.0.0"
+description = "Company page of RepoCity: static site in German and English, built from one content file."
+requires-python = ">=3.12"
+dependencies = []
+
+[dependency-groups]
+dev = ["pytest>=8.3", "ruff>=0.8", "mypy>=1.13"]
+
+[tool.ruff]
+line-length = 120
+target-version = "py312"
+src = ["bau", "tests"]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "B", "UP", "N", "D"]
+ignore = ["D107"]
+pydocstyle = { convention = "google" }
+
+[tool.ruff.lint.per-file-ignores]
+"tests/*" = ["D102", "D103"]
+
+[tool.mypy]
+strict = true
+mypy_path = "bau"
+files = ["bau", "tests/test_bau.py"]
+
+[[tool.mypy.overrides]]
+module = ["test_bau"]
+disallow_untyped_decorators = false
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

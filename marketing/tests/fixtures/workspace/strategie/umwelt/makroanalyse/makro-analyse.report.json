@@ -1,0 +1,11 @@
+{
+  "run_id": "makroanalyse-2026-08-29",
+  "findings_in": 7,
+  "supported": 6,
+  "partial": 1,
+  "unsupported": 0,
+  "unreachable": 0,
+  "kept": 6,
+  "raw_chars": 11801,
+  "curated_chars": 3535
+}

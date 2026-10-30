@@ -1,0 +1,11 @@
+SYNTHETIC EXAMPLE SOURCE - invented for the bundled example workspace, not real data.
+
+Beispielinstitut fuer Konjunkturforschung
+Branchenblatt Metallverarbeitung, Ausgabe August 2026
+Veroeffentlicht: 2026-08-05
+
+Die Auftragseingaenge in der Metallverarbeitung lagen im zweiten Quartal 2026 um
+2,3 Prozent unter dem Vorjahreswert. Die Kapazitaetsauslastung betraegt 78,1 Prozent.
+
+Die Einkaufspreise fuer Hartmetall stiegen gegenueber dem Vorquartal um 6,8 Prozent.
+Die Betriebe geben an, Preissteigerungen im Mittel zu 54 Prozent weitergeben zu koennen.

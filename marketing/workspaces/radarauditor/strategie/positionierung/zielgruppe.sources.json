@@ -1,0 +1,67 @@
+{
+  "entries": [
+    {
+      "finding_id": "audience/ki-chats-statt-suchmaschine",
+      "volatility": "market",
+      "published": "2025-11-20",
+      "address": "https://www.bitkom.org/Presse/Presseinformation/Internet-Suche-Wandel-Haelfte-nutzt-KI-Chats",
+      "kind": "web"
+    },
+    {
+      "finding_id": "audience/generative-ki-nutzung",
+      "volatility": "market",
+      "published": "2025-05-05",
+      "address": "https://www.bitkom.org/Presse/Presseinformation/KI-Nutzung-boomt-Angst-vor-Abhaengigkeit-Ausland-gross",
+      "kind": "web"
+    },
+    {
+      "finding_id": "audience/handwerkersuche-webseite-ausschluss",
+      "volatility": "market",
+      "published": "2025-06-12",
+      "address": "https://www.bitkom.org/Presse/Presseinformation/Handwerkersuche-Gespraech-schlaegt-Netz",
+      "kind": "web"
+    },
+    {
+      "finding_id": "audience/arztbewertungen-online",
+      "volatility": "market",
+      "published": "2023-02-06",
+      "address": "https://www.bitkom.org/Presse/Presseinformation/Haelfte-liest-Arzt-Bewertungen-Internet",
+      "kind": "web"
+    },
+    {
+      "finding_id": "audience/google-maps-bewertungen",
+      "volatility": "market",
+      "published": "2026-04-24",
+      "address": "https://www.leinetal24.de/welt/umfrage-so-steuern-google-bewertungen-alltaegliche-entscheidungen-zr-94277454.html",
+      "kind": "web"
+    },
+    {
+      "finding_id": "audience/handwerksbetriebe-deutschland",
+      "volatility": "structural",
+      "published": "2026-06-01",
+      "address": "https://www.zdh.de/daten-und-fakten/kennzahlen-des-handwerks/wirtschaftlicher-stellenwert-des-handwerks-2025/",
+      "kind": "web"
+    },
+    {
+      "finding_id": "audience/handwerk-kammerbezirk-muenster",
+      "volatility": "structural",
+      "published": "2026-04-24",
+      "address": "https://www.handwerksblatt.de/die-handwerkskammern-in-deutschland/hwk-munster/die-handwerkskonjunktur-kuehlt-ab",
+      "kind": "web"
+    },
+    {
+      "finding_id": "audience/handwerk-sichtbarkeit-ki",
+      "volatility": "market",
+      "published": "2025-08-28",
+      "address": "https://www.bitkom.org/Presse/Presseinformation/Handwerk-Azubis-Betriebe-Digitalisierung",
+      "kind": "web"
+    },
+    {
+      "finding_id": "audience/digitale-intensitaet-kleine-unternehmen",
+      "volatility": "structural",
+      "published": "2025-06-27",
+      "address": "https://bundesnetzagentur.de/DE/Fachthemen/Digitales/Mittelstand/Kennzahlen/artikel.html",
+      "kind": "web"
+    }
+  ]
+}

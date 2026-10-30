@@ -1,0 +1,10 @@
+# Cloudflare Pages project "repocity-seite": static files from site/, Functions from functions/.
+# Once deployed, this file is the source of truth for these settings; the dashboard shows them read-only.
+name = "repocity-seite"
+pages_build_output_dir = "./site"
+compatibility_date = "2026-10-30"
+
+# Public values only: the anon key is meant for browsers and is limited by row level security.
+[vars]
+SUPABASE_URL = "https://yizvntdwdajlgcbjcves.supabase.co"
+SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InlpenZudGR3ZGFqbGdjYmpjdmVzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTIxNTc4NzksImV4cCI6MjEwNzczMzg3OX0.Gpk-QXpo1CaxyOogurryFX1Nc7_cxORbGASXS9iaBJc"
