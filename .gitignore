@@ -13,3 +13,6 @@ __pycache__/
 *.tgz
 /CLAUDE.md
 /radarauditor/CLAUDE.md
+
+# Lokale Claude-Code-Verknüpfungen und Einstellungen je Rechner
+.claude/
