@@ -18,6 +18,7 @@ const KIND_LABEL: Record<string, string> = {
   "audit-anfrage": "Audit-Anfrage",
   "audit-vorschlag": "Terminvorschlag",
   "audit-termin": "Audit-Termin",
+  monatsservice: "Monatsservice",
   "rechnung-offen": "Rechnung offen",
   tagesablauf: "Tagesablauf",
   "pruefung-faellig": "Monatsprüfung fällig",

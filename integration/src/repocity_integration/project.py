@@ -53,6 +53,8 @@ MIGRATION_ORDER: tuple[str, ...] = (
     f"{_CRM}/012_assistent.sql",
     f"{_CRM}/013_audit_anfragen.sql",
     f"{_COCKPIT}/007_audit_anfragen.sql",
+    f"{_RADAR}/016_kundensuche_monatsservice.sql",
+    f"{_COCKPIT}/008_monatsservice.sql",
 )
 
 ADMIN_ID = UUID("00000000-0000-4000-8000-00000000000a")

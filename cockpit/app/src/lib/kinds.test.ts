@@ -26,6 +26,7 @@ describe("kindLabel", () => {
     ["audit-anfrage", "Audit-Anfrage"],
     ["audit-vorschlag", "Terminvorschlag"],
     ["audit-termin", "Audit-Termin"],
+    ["monatsservice", "Monatsservice"],
   ])("names %s as %s", (kind, label) => {
     expect(kindLabel(kind)).toBe(label);
   });

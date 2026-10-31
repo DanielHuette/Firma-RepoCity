@@ -66,6 +66,8 @@ RERUNNABLE = [
     "crm/supabase/migrations/012_assistent.sql",
     "crm/supabase/migrations/013_audit_anfragen.sql",
     "cockpit/supabase/migrations/007_audit_anfragen.sql",
+    "radarauditor/supabase/migrations/016_kundensuche_monatsservice.sql",
+    "cockpit/supabase/migrations/008_monatsservice.sql",
 ]
 
 
@@ -179,6 +181,7 @@ def test_rerunning_the_new_migrations_keeps_data_and_removes_a_stray_key(db: Dat
     assert db.value("select subject from crm.mail_texts where key = 'quote'") == "Mein Betreff"
     assert db.value("select count(*) from vault.secrets where name = 'crm_anthropic_key'") == 0
     assert db.value("select count(*) from cron.job where jobname = 'crm-daily'") == 1
+    assert db.value("select count(*) from cron.job where jobname = 'radar-prospect-purge'") == 1
     assert db.value("select count(*) from crm.outbox") == 6
     for call in (
         "crm.opt_out(gen_random_uuid())",

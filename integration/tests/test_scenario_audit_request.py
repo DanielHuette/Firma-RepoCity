@@ -538,7 +538,7 @@ def test_t12_the_reschedule_link_ends_with_the_appointment(db: Database) -> None
     db.run(
         "set session_replication_role = replica; update crm.appointments set "
         "starts_at = now() - interval '2 hours', ends_at = now() - interval '1 hour', "
-        "starts_on = (now() at time zone 'Europe/Berlin')::date; "
+        "starts_on = ((now() - interval '2 hours') at time zone 'Europe/Berlin')::date; "
         "set session_replication_role = origin"
     )
 

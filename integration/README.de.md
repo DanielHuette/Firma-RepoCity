@@ -6,7 +6,7 @@ RadarAuditor, CRM und Cockpit teilen sich ein Supabase-Projekt und rufen gegense
 Funktionen und Auslöser auf. Diese Tests bauen die Datenbank auf einem Wegwerf-PostgreSQL nach und
 prüfen daran den ganzen Ablauf aus `Dokumentation/INTEGRATION.de.md`: Angebot, Annahme, Auswertung
 der Kundenmails, abgeschlossener Auftrag, Monatsrechnung, Monatsprüfung über den Knopf auf dem
-Sperrbildschirm, Bitte um eine Bewertung, Mahnwesen, Telefon-Assistent, Kontoauszüge und Rückbuchungen, Kalender, Nachfassen, Herkunft der Kunden, Assistent und Audit-Anfragen von der Webseite.
+Sperrbildschirm, Bitte um eine Bewertung, Mahnwesen, Telefon-Assistent, Kontoauszüge und Rückbuchungen, Kalender, Nachfassen, Herkunft der Kunden, Assistent, Audit-Anfragen von der Webseite, Kundensuche und Monatsservice.
 
 ## Szenarien
 **Context:** jeder Weg, den ein Kunde und Daniel gehen können, von Anfang bis Ende, über die Aufrufe, die jeder Teil macht (`tests/actors.py`). | **Input:** das aufgebaute Projekt. | **Output:** ein Test je Zeile, benannt nach der Nummer.
@@ -60,6 +60,11 @@ Sperrbildschirm, Bitte um eine Bewertung, Mahnwesen, Telefon-Assistent, Kontoaus
 | S8 | Von Daniel abgehakt | keine Erinnerung | `tests/test_scenario_service.py` |
 | S9 | Ein Schritt des Tagesablaufs scheitert | die anderen laufen, eine Mitteilung pro Tag | `tests/test_scenario_service.py` |
 | S10 | Link eingetragen, Kunde ohne Adresse | keine Meldung „Link fehlt“ mehr, Bitte geht raus, sobald die Adresse da ist | `tests/test_scenario_service.py` |
+| S11 | Monatsprüfung gemeldet, Abo aus angenommenem Angebot, Erstoptimierung fertig | ein Auftrag `optimize` auf dem Auftrag des Abos, zweiter Aufruf derselbe | `tests/test_scenario_monthly_service.py` |
+| S12 | Kein aktives Abo, Verkaufsprüfung, Aufruf aus der App | nichts eingeplant, abgelehnt, abgelehnt | `tests/test_scenario_monthly_service.py` |
+| S13 | Entwürfe des Monats gespeichert, Ereignis zweimal; Verkauf oder keine Entwürfe | eine Mitteilung ohne Knöpfe mit Link zu den Entwürfen; sonst keine | `tests/test_scenario_monthly_service.py` |
+| S14 | Entwürfe des Monats auf einem abgeschlossenen Auftrag freigegeben und erledigt | kein zweites „Auftrag fertig“, keine neue Rechnung | `tests/test_scenario_monthly_service.py` |
+| S15 | Monatsprüfung, während Entwürfe der Erstoptimierung offen sind | kein Monatsservice, die Entwürfe bleiben, kein „Auftrag fertig“, keine Rechnung | `tests/test_scenario_monthly_service.py` |
 | F1 | Auszug mit Rechnungsnummer und genau offenem Betrag | Rechnung zum Buchungstag bezahlt, keine Freigabe | `tests/test_scenario_finance.py` |
 | F2 | Dieselbe Datei zweimal | nichts dazu, eine Zahlung, eine Ausgabe | `tests/test_scenario_finance.py` |
 | F3 | Nummer mit anderem Betrag, „Zuordnen“ getippt | Teilzahlung gebucht, Link zu Finanzen | `tests/test_scenario_finance.py` |
@@ -174,6 +179,23 @@ Sperrbildschirm, Bitte um eine Bewertung, Mahnwesen, Telefon-Assistent, Kontoaus
 | T18 | Vorgeschlagene Zeiten | 48 Stunden nur für diesen Betrieb: nicht im Formular, nicht in fremden Vorschlägen, nicht bestätigbar für andere | `tests/test_scenario_audit_request.py` |
 | T19 | Dieselbe Anfrage zweimal gesendet (gleiche Kennung) | eine Anfrage, eine Mitteilung, beide Male „ok“ | `tests/test_scenario_audit_request.py` |
 | T20 | Ganze Kette zweimal, 009 allein, Cockpit 002 allein erneut ausgeführt | Audit-Ablauf läuft weiter wie vorher | `tests/test_scenario_audit_request.py` |
+| P1 | Treffer der Kundensuche „Ins CRM als Interessent“ mit den von Daniel abgeschriebenen Angaben | CRM-Kunde mit diesen Angaben und Herkunft RadarAuditor, offener Vorgang mit erlaubtem Kontaktweg, Eintrag in der Kundenakte, keine Mitteilung „Neuer Kunde“ | `tests/test_scenario_prospects.py` |
+| P2 | Derselbe Treffer zweimal | ein Kunde, ein Vorgang | `tests/test_scenario_prospects.py` |
+| P3 | Name und Ort schon im CRM | verknüpft, kein zweiter Kunde, vorhandener Vorgang bleibt | `tests/test_scenario_prospects.py` |
+| P4 | Betrieb hat Werbung widersprochen | abgelehnt, kein Vorgang | `tests/test_scenario_prospects.py` |
+| P5 | Leser | abgelehnt | `tests/test_scenario_prospects.py` |
+| P6 | Widerspruch, dazu ein zweiter CRM-Kunde gleichen Namens | abgelehnt, nichts angelegt | `tests/test_scenario_prospects.py` |
+| P7 | Widerspruch unter anderem Namen, gleiche Telefonnummer anders geschrieben | abgelehnt | `tests/test_scenario_prospects.py` |
+| P8 | Widerspruch, CRM-Kunde gelöscht, derselbe Ort (`place_id`) unter neuem Namen | abgelehnt, die Sperrliste bleibt | `tests/test_scenario_prospects.py` |
+| P9 | Liste mit einem Betrieb, der widersprochen hat; Widerspruch kommt später | Marke beim Speichern und nachträglich | `tests/test_scenario_prospects.py` |
+| P10 | App schreibt direkt in die Suchtabellen, Gast liest | abgelehnt, abgelehnt | `tests/test_scenario_prospects.py` |
+| P11 | 016 und Cockpit 008 erneut | Zeilen, Rechte, Zeilenregeln und feste Suchpfade bleiben | `tests/test_scenario_prospects.py` |
+| P12 | Widerspruch ohne Ort im CRM, Treffer gleichen Namens | abgelehnt und in der Liste markiert | `tests/test_scenario_prospects.py` |
+| P13 | Widerspruch mit Ort „Münster (Westf.)“, Treffer in Münster | abgelehnt und markiert | `tests/test_scenario_prospects.py` |
+| P14 | Widerspruch „Bäckerei Korn“, Treffer „Bäckerei Korn Inh. Peter Müller“ mit anderer Telefonnummer | abgelehnt und markiert | `tests/test_scenario_prospects.py` |
+| P15 | Daniel tippt einen anderen Namen und keine Telefonnummer | abgelehnt, weil die gespeicherten Angaben des Treffers zählen | `tests/test_scenario_prospects.py` |
+| P16 | Andere Bäckerei im selben Ort | wird ins CRM übernommen | `tests/test_scenario_prospects.py` |
+| P17 | Liste älter als 24 Stunden, Zeitplan `radar-prospect-purge` läuft ohne Server | Suche abgelaufen, nur Kennung und CRM-Verknüpfung bleiben, Zeitplan stündlich, nicht zur vollen oder halben Stunde | `tests/test_scenario_prospects.py` |
 
 Die gezielten Tests der einzelnen Schritte bleiben in den übrigen Testdateien.
 
@@ -207,6 +229,7 @@ Das Live-Projekt hat seine Migrationen in dieser Reihenfolge bekommen, und
 8. CRM 007, Cockpit 004, CRM 008, Cockpit 005
 9. CRM 009, CRM 010, Cockpit 006, CRM 011, CRM 012
 10. CRM 013, Cockpit 007
+11. RadarAuditor 016, Cockpit 008
 
 Erneut einspielen geht nur als ganze Kette ab RadarAuditor 013 in dieser Reihenfolge (die Liste `RERUNNABLE` in `tests/test_project.py`): eine ältere Migration allein setzt ältere Fassungen von Funktionen und Rechten zurück, die die späteren ersetzen.
 

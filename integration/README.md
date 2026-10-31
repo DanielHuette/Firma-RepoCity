@@ -5,7 +5,7 @@
 RadarAuditor, CRM and Cockpit share one Supabase project and call each other's functions and
 triggers. These tests build that database on a throwaway PostgreSQL and run the whole flow of
 `Dokumentation/INTEGRATION.md` against it: quote, acceptance, mail triage, completed order,
-monthly invoice, monthly audit through the lock-screen action, review requests, dunning, the phone assistant, bank statements and reversals, the calendar, follow-ups, the channel of a customer, the assistant and audit requests from the website.
+monthly invoice, monthly audit through the lock-screen action, review requests, dunning, the phone assistant, bank statements and reversals, the calendar, follow-ups, the channel of a customer, the assistant, audit requests from the website, the customer search and the monthly service.
 
 ## Scenarios
 **Context:** every path a customer and Daniel can take, end to end, through the calls each part makes (`tests/actors.py`). | **Input:** the built project. | **Output:** one test per row, named after its number.
@@ -59,6 +59,11 @@ monthly invoice, monthly audit through the lock-screen action, review requests, 
 | S8 | Request ticked off by Daniel | no reminder | `tests/test_scenario_service.py` |
 | S9 | One step of the daily routine fails | the others run, one notice per day | `tests/test_scenario_service.py` |
 | S10 | Link set while the customer has no address | no more "link missing" notices, request goes out once the address is there | `tests/test_scenario_service.py` |
+| S11 | Monthly audit reported, subscription from an accepted quote, initial optimisation finished | one `optimize` job on the subscription's order, a second call returns it | `tests/test_scenario_monthly_service.py` |
+| S12 | No active subscription, sales audit, call from the app | nothing queued, refused, refused | `tests/test_scenario_monthly_service.py` |
+| S13 | Drafts of the month stored, event twice; sale or no drafts | one notice without buttons linking to the drafts; otherwise none | `tests/test_scenario_monthly_service.py` |
+| S14 | Drafts of the month on a finished order approved and done | no second "order finished", no new invoice | `tests/test_scenario_monthly_service.py` |
+| S15 | Monthly audit while drafts of the initial optimisation are open | no monthly service, the drafts stay, no "order finished", no invoice | `tests/test_scenario_monthly_service.py` |
 | F1 | Statement with invoice number and exact open amount | invoice paid on the booking date, no approval | `tests/test_scenario_finance.py` |
 | F2 | Same file twice | nothing added, one payment, one expense | `tests/test_scenario_finance.py` |
 | F3 | Number with another amount, "Zuordnen" tapped | part payment booked, link to Finanzen | `tests/test_scenario_finance.py` |
@@ -173,6 +178,23 @@ monthly invoice, monthly audit through the lock-screen action, review requests, 
 | T18 | Proposed hours | 48 hours for that business only: not in the form, not in other proposals, not confirmable for others | `tests/test_scenario_audit_request.py` |
 | T19 | The same request sent twice (same key) | one request, one notice, „ok“ both times | `tests/test_scenario_audit_request.py` |
 | T20 | Whole chain twice, 009 alone, Cockpit 002 alone run again | the audit flow keeps working | `tests/test_scenario_audit_request.py` |
+| P1 | Customer search result "Ins CRM als Interessent" with what Daniel copied | CRM customer with these entries and source RadarAuditor, open deal with the lawful contact way, line in the customer file, no "Neuer Kunde" notice | `tests/test_scenario_prospects.py` |
+| P2 | Same result twice | one customer, one deal | `tests/test_scenario_prospects.py` |
+| P3 | Name and city already in the CRM | linked, no second customer, the existing deal stays | `tests/test_scenario_prospects.py` |
+| P4 | Business objected to advertising | refused, no deal | `tests/test_scenario_prospects.py` |
+| P5 | Reader | refused | `tests/test_scenario_prospects.py` |
+| P6 | Objection plus a second CRM customer of the same name | refused, nothing created | `tests/test_scenario_prospects.py` |
+| P7 | Objection under another name, same phone number written differently | refused | `tests/test_scenario_prospects.py` |
+| P8 | Objection, CRM customer deleted, same place (`place_id`) under a new name | refused, the objection list stays | `tests/test_scenario_prospects.py` |
+| P9 | List with a business that objected; objection given later | mark when stored and afterwards | `tests/test_scenario_prospects.py` |
+| P10 | App writes directly into the search tables, guest reads | refused, refused | `tests/test_scenario_prospects.py` |
+| P11 | 016 and Cockpit 008 again | rows, rights, row rules and fixed search paths stay | `tests/test_scenario_prospects.py` |
+| P12 | Objection without city in the CRM, result of the same name | refused and marked in the list | `tests/test_scenario_prospects.py` |
+| P13 | Objection with city "Münster (Westf.)", result in Münster | refused and marked | `tests/test_scenario_prospects.py` |
+| P14 | Objection "Bäckerei Korn", result "Bäckerei Korn Inh. Peter Müller" with another phone number | refused and marked | `tests/test_scenario_prospects.py` |
+| P15 | Daniel types another name and no phone number | refused, because the stored entries of the result count | `tests/test_scenario_prospects.py` |
+| P16 | Another bakery in the same city | taken into the CRM | `tests/test_scenario_prospects.py` |
+| P17 | List older than 24 hours, schedule `radar-prospect-purge` runs without the server | search expired, only identifier and CRM link stay, schedule hourly, not on the full or half hour | `tests/test_scenario_prospects.py` |
 
 The focused tests of the single steps stay in the other test files.
 
@@ -206,6 +228,7 @@ applies them the same way:
 8. CRM 007, Cockpit 004, CRM 008, Cockpit 005
 9. CRM 009, CRM 010, Cockpit 006, CRM 011, CRM 012
 10. CRM 013, Cockpit 007
+11. RadarAuditor 016, Cockpit 008
 
 Re-running is safe only for the whole chain from RadarAuditor 013 on, in this order (the list `RERUNNABLE` in `tests/test_project.py`): an older migration on its own puts back older function bodies and rights that the later ones replace.
 
