@@ -33,8 +33,7 @@ exception when others then
   return new;
 end $$;
 
-drop trigger if exists cockpit_monthly_drafts on public.events;
-create trigger cockpit_monthly_drafts after insert on public.events
+create or replace trigger cockpit_monthly_drafts after insert on public.events
   for each row when (new.kind = 'optimization.drafted') execute function cockpit.on_monthly_drafts();
 
 revoke all on function cockpit.on_monthly_drafts() from public, anon, authenticated;
